@@ -1,4 +1,4 @@
-# IDPA 2
+# IDPA Projekt 2
 
 ## Table of Contents
 
@@ -9,6 +9,8 @@
 ## Built with <a name="built-with"></a>
 
 [asp.net](https://dotnet.microsoft.com/apps/aspnet)
+
+[JQuery](https://jquery.com/)
 
 [Tailwind CSS](https://tailwindcss.com/)
 
@@ -21,4 +23,3 @@ Kris Prugarewicz - kprugare@gmail.com<br>
 Merlin van der Kolk - vanderkolk.merlin@gmail.com<br>
 Lars Baumgartner - l.treegardener@gmail.com<br>
 Romain Nykyforchyn - romainnyky@gmail.com<br>
-
