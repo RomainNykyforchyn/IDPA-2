@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<users>
+  <user>
+    <name>test</name>
+    <password>test</password>
+    <international>1</international>
+    <amount>1</amount>
+    <volume>1</volume>
+    <provider>salt</provider>
+  </user>
+</users>
