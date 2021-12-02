@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<users>
+  <user>
+    <name>test</name>
+    <password>test</password>
+    <international>true</international>
+    <amount>1</amount>
+    <volume>1024</volume>
+    <provider>Swisscom</provider>
+  </user>
+</users>

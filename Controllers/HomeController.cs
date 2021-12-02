@@ -1,5 +1,7 @@
-﻿using System;
+﻿using idpa.Models;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,9 +11,16 @@ using System.Xml.Linq;
 namespace idpa.Controllers
 {
     public class HomeController : Controller
-    {
+    {   private String xmlPath;
+        private HomeModel model;
+        private XDocument doc;
+        public HomeController()
+        {
+            model = new HomeModel();
+            doc = model.getDoc();
+        }
 
-        private String xmlPath = "/Models/users.xml";
+        
         [HttpGet]
         public ActionResult Index()
         {
@@ -26,7 +35,6 @@ namespace idpa.Controllers
         }
 
 
-        [HttpGet]
         public ActionResult Register()
         {
             ViewBag.Message = "Your application description page.";
@@ -70,17 +78,19 @@ namespace idpa.Controllers
             {
                 boolInter = true;
             }
-            if (international.Equals("Nein"))
-            {
-                boolInter = false;
+            else { if (international.Equals("Nein"))
+                {
+                    boolInter = false;
+                }
+                else
+                {
+                    return View();
+                }
             }
-            else
-            {
-                return View();
-            }
+            
 
             
-            XDocument doc = XDocument.Load(xmlPath);
+            
             XElement users = doc.Element("users");
             XElement user = new XElement("user");
             user.Add(new XElement("name", name), new XElement("password",password), new XElement("international", boolInter), new XElement("amount", intAmount), new XElement("volume", intVolume), new XElement("provider", provider));
@@ -88,7 +98,7 @@ namespace idpa.Controllers
             /*school.Add(new XElement("Student",
                        new XElement("FirstName", "David"),
                        new XElement("LastName", "Smith")));*/
-            doc.Save(xmlPath);
+            doc.Save(model.getPath());
             return RedirectToAction("/Index");
         }
 
