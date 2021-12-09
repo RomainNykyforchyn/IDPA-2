@@ -10,13 +10,13 @@
     <h1> Register</h1>
     <form method="post" action="">
         <p>Name</p>
-        <input type="text" name="name" value="">
+        <input type="text" name="name" value="" required>
         <br>
         <p>Password</p>
-        <input type="text" name="password" value="">
+        <input type="text" name="password" value="" required>
         <br>
         <p>Provider</p>
-        <select name="provider" id="provider">
+        <select name="provider" id="provider" required>
             <option value="Swisscom">Swisscom</option>
             <option value="Sunrise">Sunrise</option>
             <option value="Salt">Salt</option>
@@ -25,18 +25,18 @@
         </select>
         <br>
         <p>International?</p>
-        <select name="international" id="international">
+        <select name="international" id="international" required> 
             <option value="Ja">Ja</option>
             <option value="Nein">Nein</option>
         </select>
         <br>
         <p>Wie oft telefonieren Sie pro Monat?</p>
         <input type="number" name="amount" id="amount"
-               min="0" max="3000" step="1" value="">
+               min="0" max="3000" step="1" value="" required>
         <br>
         <p>Gewünschtes Datenvolumen in MB</p>
         <input type="number" name="volume" id="volume"
-               min="0" max="200000" step="1024" value="">
+               min="0" max="200000" step="1024" value="" required>
         <br>
         <input type="submit" value="Submit" class="submit" />
         <p>Already have an account?</p>

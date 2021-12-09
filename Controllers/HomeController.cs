@@ -14,8 +14,18 @@ namespace idpa.Controllers
     {   private String xmlPath;
         private HomeModel model;
         private XDocument doc;
+        private bool isLoggedIn; 
         public HomeController()
         {
+            if (isLoggedIn)
+            {
+
+            }
+            else
+            {
+                isLoggedIn = false;
+            }
+            
             model = new HomeModel();
             doc = model.getDoc();
         }
@@ -29,9 +39,28 @@ namespace idpa.Controllers
         [HttpPost]
         public ActionResult Index(String name,  String password)
         {
-            XDocument doc = XDocument.Load(xmlPath);
-            XmlNode node;
-            return RedirectToAction("/Register");
+            XDocument doc = model.getDoc();
+            try { 
+               IEnumerable<XElement> user = from el in doc.Elements("user") where (string)el.Element("name")==name && (string)el.Element("password") == password select el;
+                isLoggedIn = true;
+             }catch(Exception e)
+            {
+
+             }
+            
+
+
+            /*
+             XElement root = XElement.Load("PurchaseOrder.xml");
+IEnumerable<XElement> address =
+    from el in root.Elements("Address")
+    where (string)el.Attribute("Type") == "Billing"
+    select el;
+foreach (XElement el in address)
+    Console.WriteLine(el);
+             */
+
+            return RedirectToAction("/Tarif");
         }
 
 
@@ -93,6 +122,7 @@ namespace idpa.Controllers
             
             XElement users = doc.Element("users");
             XElement user = new XElement("user");
+            user.Add(new XAttribute("id", GenerateNextId()));
             user.Add(new XElement("name", name), new XElement("password",password), new XElement("international", boolInter), new XElement("amount", intAmount), new XElement("volume", intVolume), new XElement("provider", provider));
             users.Add(user);
             /*school.Add(new XElement("Student",
@@ -102,11 +132,26 @@ namespace idpa.Controllers
             return RedirectToAction("/Index");
         }
 
-        public ActionResult Contact()
+        public ActionResult Tarif()
         {
-            ViewBag.Message = "Your contact page.";
-
+            //if (!isLoggedIn)
+            //{
+            //    return View();
+            //}
+            //else
+            //{
+            //    return RedirectToAction("/Index");
+            //}
             return View();
+
+            
+        }
+        private int GenerateNextId()
+        {
+            return doc.Descendants("user")
+                       .OrderByDescending(x => Convert.ToInt32(x.Attribute("id").Value))
+                       .Select(x => Convert.ToInt32(x.Attribute("id").Value))
+                       .FirstOrDefault() + 1;
         }
     }
 }
