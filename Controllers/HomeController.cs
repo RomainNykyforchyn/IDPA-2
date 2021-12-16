@@ -17,9 +17,6 @@ namespace idpa.Controllers
         private bool isLoggedIn; 
         public HomeController()
         {
-            
-            
-            
             model = new HomeModel();
             doc = model.getDoc();
         }
@@ -28,7 +25,6 @@ namespace idpa.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            Session["isLoggedIn"] = "";
             return View();
         }
         [HttpPost]
@@ -129,7 +125,7 @@ foreach (XElement el in address)
 
         public ActionResult Tarif()
         {
-            object value = Session["ediblesession"];
+            object value = Session["isLoggedIn"];
             if (value != null)
             {
                 isLoggedIn = (bool)value;
@@ -138,8 +134,7 @@ foreach (XElement el in address)
             {
                 isLoggedIn = false; // or whatever you want to do if there is no value
             }
-            try {
-                isLoggedIn = (bool)Session["isLoggedIn"];
+            
                 if (isLoggedIn)
                 {
                     return View();
@@ -148,15 +143,6 @@ foreach (XElement el in address)
                 {
                     return RedirectToAction("/Index");
                 }    
-            }
-            catch(Exception e)
-            {
-                return RedirectToAction("/Index");
-            }
-            
-            
-
-            
         }
         private int GenerateNextId()
         {
