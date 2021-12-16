@@ -138,15 +138,21 @@ foreach (XElement el in address)
             {
                 isLoggedIn = false; // or whatever you want to do if there is no value
             }
-            if (isLoggedIn)
+            try {
+                isLoggedIn = (bool)Session["isLoggedIn"];
+                if (isLoggedIn)
                 {
                     return View();
                 }
                 else
                 {
                     return RedirectToAction("/Index");
-                }  
-            
+                }    
+            }
+            catch(Exception e)
+            {
+                return RedirectToAction("/Index");
+            }
             
             
 
