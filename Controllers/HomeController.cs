@@ -17,14 +17,8 @@ namespace idpa.Controllers
         private bool isLoggedIn; 
         public HomeController()
         {
-            if (isLoggedIn)
-            {
-
-            }
-            else
-            {
-                isLoggedIn = false;
-            }
+            
+            
             
             model = new HomeModel();
             doc = model.getDoc();
@@ -34,6 +28,7 @@ namespace idpa.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            Session["isLoggedIn"] = "";
             return View();
         }
         [HttpPost]
@@ -42,7 +37,7 @@ namespace idpa.Controllers
             XDocument doc = model.getDoc();
             try { 
                IEnumerable<XElement> user = from el in doc.Elements("user") where (string)el.Element("name")==name && (string)el.Element("password") == password select el;
-                isLoggedIn = true;
+                Session["isLoggedIn"] = true;
              }catch(Exception e)
             {
 
@@ -134,15 +129,26 @@ foreach (XElement el in address)
 
         public ActionResult Tarif()
         {
-            //if (!isLoggedIn)
-            //{
-            //    return View();
-            //}
-            //else
-            //{
-            //    return RedirectToAction("/Index");
-            //}
-            return View();
+            object value = Session["ediblesession"];
+            if (value != null)
+            {
+                isLoggedIn = (bool)value;
+            }
+            else
+            {
+                isLoggedIn = false; // or whatever you want to do if there is no value
+            }
+            if (isLoggedIn)
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("/Index");
+                }  
+            
+            
+            
 
             
         }

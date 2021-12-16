@@ -8,4 +8,12 @@
     <volume>1024</volume>
     <provider>Swisscom</provider>
   </user>
+  <user id="2">
+    <name>gaga</name>
+    <password>gaga</password>
+    <international>false</international>
+    <amount>3</amount>
+    <volume>2048</volume>
+    <provider>Swisscom</provider>
+  </user>
 </users>
