@@ -1,44 +1,57 @@
-﻿using idpa.Models;
+﻿using idpa.Content;
+using idpa.Models;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Xml;
 using System.Xml.Linq;
 
 namespace idpa.Controllers
 {
     public class HomeController : Controller
-    {   private String xmlPath;
+    {
         private HomeModel model;
         private XDocument doc;
-        private bool isLoggedIn; 
+        private bool isLoggedIn;
+        private User loggedUser;
+        //private String name, password;
         public HomeController()
         {
             model = new HomeModel();
             doc = model.getDoc();
         }
 
-        
+
         [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult Index(String name,  String password)
+        public ActionResult Index(String name, String password)
         {
             XDocument doc = model.getDoc();
-            try { 
-               IEnumerable<XElement> user = from el in doc.Elements("user") where (string)el.Element("name")==name && (string)el.Element("password") == password select el;
-                Session["isLoggedIn"] = true;
-             }catch(Exception e)
+            try
+            {   
+                IEnumerable<XElement> user_ = from el in doc.Elements("user") where (string)el.Element("name") == name && (string)el.Element("password") == password select el;
+                //for(int i = 0; i < user.Elements().Count())
+                //{
+
+                //}
+                XElement user = (XElement)user_;
+                loggedUser = new User(user.Attributes()., user.Element, user.ElementAt(1), user.ElementAt(2), user.ElementAt(3), user.ElementAt(4), user.ElementAt(5), user.ElementAt(6));
+                    Session["isLoggedIn"] = true;
+                if()
+                Session["name"] = name;
+                Session["password"] = password;
+
+
+            }
+            catch (Exception e)
             {
 
-             }
-            
+            }
+
 
 
             /*
@@ -50,7 +63,8 @@ IEnumerable<XElement> address =
 foreach (XElement el in address)
     Console.WriteLine(el);
              */
-
+            //this.name = name;
+            //this.password = password;
             return RedirectToAction("/Tarif");
         }
 
@@ -82,23 +96,25 @@ foreach (XElement el in address)
             {
                 case "Swisscom":
                     break;
-                case "Sunrise": 
+                case "Sunrise":
                     break;
-                case "Salt": 
+                case "Salt":
                     break;
-                case "Yallo": 
+                case "Yallo":
                     break;
-                case "Wingo": 
+                case "Wingo":
                     break;
                 default: return View();
 
             }
-            
+
             if (international.Equals("Ja"))
             {
                 boolInter = true;
             }
-            else { if (international.Equals("Nein"))
+            else
+            {
+                if (international.Equals("Nein"))
                 {
                     boolInter = false;
                 }
@@ -107,19 +123,20 @@ foreach (XElement el in address)
                     return View();
                 }
             }
-            
 
-            
-            
+
+
+
             XElement users = doc.Element("users");
             XElement user = new XElement("user");
             user.Add(new XAttribute("id", GenerateNextId()));
-            user.Add(new XElement("name", name), new XElement("password",password), new XElement("international", boolInter), new XElement("amount", intAmount), new XElement("volume", intVolume), new XElement("provider", provider));
+            user.Add(new XElement("name", name), new XElement("password", password), new XElement("international", boolInter), new XElement("amount", intAmount), new XElement("volume", intVolume), new XElement("provider", provider), new XElement("admin", "0"));
             users.Add(user);
             /*school.Add(new XElement("Student",
                        new XElement("FirstName", "David"),
                        new XElement("LastName", "Smith")));*/
             doc.Save(model.getPath());
+            
             return RedirectToAction("/Index");
         }
 
@@ -134,15 +151,91 @@ foreach (XElement el in address)
             {
                 isLoggedIn = false; // or whatever you want to do if there is no value
             }
-            
-                if (isLoggedIn)
+
+            if (isLoggedIn)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("/Index");
+            }
+        }
+        [HttpPost]
+        public ActionResult Tarif(String international, String amount, String volume, String provider)
+        {
+            //Declaration
+            int intAmount;
+            Boolean boolInter;
+            int intVolume;
+
+            //Validation
+            try
+            {
+                intAmount = Int32.Parse(amount);
+                intVolume = Int32.Parse(volume);
+            }
+            catch (Exception e)
+            {
+                return View();
+            }
+            switch (provider)
+            {
+                case "Swisscom":
+                    break;
+                case "Sunrise":
+                    break;
+                case "Salt":
+                    break;
+                case "Yallo":
+                    break;
+                case "Wingo":
+                    break;
+                default: return View();
+
+            }
+
+            if (international.Equals("Ja"))
+            {
+                boolInter = true;
+            }
+            else
+            {
+                if (international.Equals("Nein"))
                 {
-                    return View();
+                    boolInter = false;
                 }
                 else
                 {
-                    return RedirectToAction("/Index");
-                }    
+                    return View();
+                }
+            }
+            XElement users = doc.Element("users");
+            foreach(XElement user in users.Elements())
+            {
+                String name = (String)user.Element("name");
+                String _name = (String)Session["name"];
+                String password = (String)user.Element("password");
+                String _password = (String)Session["password"];
+                if (name.Equals(_name) && password.Equals(_password))
+                {
+                    user.Element("international").SetValue(boolInter);
+                    user.Element("amount").SetValue(intAmount);
+                    user.Element("volume").SetValue(intVolume);
+                    user.Element("provider").SetValue(provider);
+                    doc.Save(model.getPath());
+                    return RedirectToAction("/Tarif");
+                }
+            }
+            //XElement user = new XElement("user");
+            //user.Add(new XAttribute("id", GenerateNextId()));
+            //user.Add(new XElement("name", name), new XElement("password", password), new XElement("international", boolInter), new XElement("amount", intAmount), new XElement("volume", intVolume), new XElement("provider", provider));
+            //users.Add(user);
+            /*school.Add(new XElement("Student",
+                       new XElement("FirstName", "David"),
+                       new XElement("LastName", "Smith")));*/
+            
+            return RedirectToAction("/Tarif");
         }
         private int GenerateNextId()
         {

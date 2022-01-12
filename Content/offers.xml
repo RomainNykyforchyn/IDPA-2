@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<offers>
+  <offer>
+    <id></id>
+    <provider></provider>
+    <name></name>
+    <location></location>
+    <internet></internet>
+    <speed></speed>
+    <telephone></telephone>
+    <price></price>
+    <price2></price2>
+    <minimumTime></minimumTime>
+    <addition></addition>
+  </offer>
+</offers>

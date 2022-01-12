@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <users>
   <user id="1">
-    <name>test</name>
-    <password>test</password>
+    <name>admin</name>
+    <password>admin</password>
     <international>true</international>
-    <amount>1</amount>
-    <volume>1024</volume>
-    <provider>Swisscom</provider>
+    <amount>4</amount>
+    <volume>2048</volume>
+    <provider>Sunrise</provider>
+    <admin>1</admin>
   </user>
   <user id="2">
     <name>gaga</name>
@@ -15,5 +16,6 @@
     <amount>3</amount>
     <volume>2048</volume>
     <provider>Swisscom</provider>
+    <admin>0</admin>
   </user>
 </users>

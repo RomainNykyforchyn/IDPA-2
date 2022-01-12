@@ -1,18 +1,19 @@
 ﻿
 @{
-    ViewBag.Title = "Tarif";
+    ViewBag.Title = "Admin";
 }
 
-<h2>Tarif</h2>
+<h2>Admin</h2>
 <form method="post" action="">
     <p>Provider</p>
-    <select name="provider" id="provider" required>
+    @*<select name="provider" id="provider" required>
         <option value="Swisscom">Swisscom</option>
         <option value="Sunrise">Sunrise</option>
         <option value="Salt">Salt</option>
         <option value="Yallo">Yallo</option>
         <option value="Wingo">Wingo</option>
-    </select>
+    </select>*@
+    <input type="text" value="provider" id="provider" required />
     <br>
     <p>International?</p>
     <select name="international" id="international" required>
