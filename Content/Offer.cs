@@ -38,5 +38,14 @@ namespace idpa.Content
         public string Internet { get => internet; set => internet = value; }
         public string Telephone { get => telephone; set => telephone = value; }
         public string Addition { get => addition; set => addition = value; }
+        public Boolean isInternational()
+        {
+            if(location!="Schweiz" && location.Contains("Schweiz"))
+            {
+                return true;
+            }
+            return false;
+        }
     }
+    
 }

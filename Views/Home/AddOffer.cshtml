@@ -1,32 +1,38 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "AddOffer";
 }
 
 <h2>AddOffer</h2>
 <form method="post">
-    <p>Provider</p>
-    @*<select name="provider" id="provider" required>
-            <option value="Swisscom">Swisscom</option>
-            <option value="Sunrise">Sunrise</option>
-            <option value="Salt">Salt</option>
-            <option value="Yallo">Yallo</option>
-            <option value="Wingo">Wingo</option>
-        </select>*@
+    <p>Provider?</p>
     <input type="text" value="provider" id="provider" required />
     <br>
-    <p>International?</p>
-    <select name="international" id="international" required>
-        <option value="Ja">Ja</option>
-        <option value="Nein">Nein</option>
-    </select>
+    <p>Name?</p>
+    <input type="text" value="name" id="name" required />
     <br>
-    <p>Wie oft telefonieren Sie pro Monat?</p>
-    <input type="number" name="amount" id="amount"
-           min="0" max="3000" step="1" value="" required>
+    <p>Ort?</p>
+    <input type="text" value="location" id="location" required />
     <br>
-    <p>Gewünschtes Datenvolumen in MB</p>
-    <input type="number" name="volume" id="volume"
-           min="0" max="200000" step="1024" value="" required>
+    <p>Internet?</p>
+    <input type="text" value="internet" id="internet" required />
+    <br>
+    <p>Geschwindigkeit in G?</p>
+    <input type="number" value="speed" id="speed" required />
+    <br>
+    <p>Telefon?</p>
+    <input type="number" value="telephone" id="telephone" required />
+    <br>
+    <p>Preis pro Monat?</p>
+    <input type="number" value="price" id="price" required />
+    <br>
+    <p>Preis2 pro Monat?</p>
+    <input type="number" value="price2" id="price2" required />
+    <br>
+    <p>Mindestlaufzeit in ganzen Monaten?</p>
+    <input type="text" value="minimumTime" id="minimumTime" required />
+    <br>
+    <p>Zusatz?</p>
+    <input type="text" value="addition" id="addition" required />
+    <br>
     <input type="submit" value="Submit" class="submit" />
 </form>

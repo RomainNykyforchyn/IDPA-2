@@ -12,8 +12,8 @@
   <user id="2">
     <name>gaga</name>
     <password>gaga</password>
-    <international>false</international>
-    <amount>3</amount>
+    <international>true</international>
+    <amount>2</amount>
     <volume>2048</volume>
     <provider>Swisscom</provider>
     <admin>0</admin>
