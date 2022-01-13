@@ -284,14 +284,14 @@ foreach (XElement el in address)
             return View();
         }
         [HttpPost]
-        public ActionResult AddOffer(String provider, String name, String location, String internet, float speed, String telephone, float price, float price2, int minimumTime, String addition)
+        public ActionResult AddOffer(String provider, String name, String location, String internet, String speed, String telephone, String price, String price2, String minimumTime, String addition)
         {
             if (!checkAdmin())
             {
                 return RedirectToAction("/Index");
             }
             XDocument doc = model.OffersDoc;
-            Offer offer = new Offer(GenerateNextId(doc, "offer"), minimumTime, speed, price, price2, provider, name, location, internet, telephone, addition);
+            Offer offer = new Offer(GenerateNextId(doc, "offer"), Int32.Parse(minimumTime), Int32.Parse(speed), Int32.Parse(price), Int32.Parse(price2), provider, name, location, internet, telephone, addition);
             
             XElement newOffer = new XElement("offer", new XElement("provider", provider), new XElement("name", name), new XElement("location", location), new XElement("internet", internet), new XElement("speed", speed), new XElement("telephone", telephone), new XElement("price", price), new XElement("price2", price2), new XElement("minimumTime", minimumTime), new XElement("addition", addition));
             doc.Root.Add(newOffer);
@@ -307,17 +307,48 @@ foreach (XElement el in address)
             ArrayList offers = new ArrayList();
             XDocument doc = model.OffersDoc;
             XElement root = doc.Root;
-            foreach(XElement offer in root.Elements())
+            foreach (XElement offer in root.Elements())
             {
-                offers.Add(new Offer(Int32.Parse(offer.Attribute("id").Value),Int32.Parse(offer.Element("minimumTime").Value), float.Parse(offer.Element("speed").Value), float.Parse(offer.Element("price").Value), float.Parse(offer.Element("price2").Value), offer.Element("provider").Value, offer.Element("name").Value, offer.Element("location").Value, offer.Element("internet").Value, offer.Element("telephone").Value, offer.Element("addition").Value));
+                offers.Add(new Offer(Int32.Parse(offer.Attribute("id").Value), Int32.Parse(offer.Element("minimumTime").Value), float.Parse(offer.Element("speed").Value), float.Parse(offer.Element("price").Value), float.Parse(offer.Element("price2").Value), offer.Element("provider").Value, offer.Element("name").Value, offer.Element("location").Value, offer.Element("internet").Value, offer.Element("telephone").Value, offer.Element("addition").Value));
             }
-            String[] offerNames = new String[offers.Count] ;
-            for(int i=0;i< offers.Count; i++)
+            String[] offerNames = new String[offers.Count];
+            for (int i = 0; i < offers.Count; i++)
             {
                 Offer offer = (Offer)offers[i];
                 offerNames[i] = offer.Name;
+
             }
-            
+
+            var listItems = offerNames.Select((r, Index) => new ListItem { Text = r, Value = Index.ToString() });
+
+            DropDownList ddl = new DropDownList();
+            ddl.Items.AddRange(listItems.ToArray());
+
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult DeleteOffer(String name)
+        {
+            ArrayList offers = new ArrayList();
+            XDocument doc = model.OffersDoc;
+            XElement root = doc.Root;
+            foreach (XElement offer in root.Elements())
+            {
+                offers.Add(new Offer(Int32.Parse(offer.Attribute("id").Value), Int32.Parse(offer.Element("minimumTime").Value), float.Parse(offer.Element("speed").Value), float.Parse(offer.Element("price").Value), float.Parse(offer.Element("price2").Value), offer.Element("provider").Value, offer.Element("name").Value, offer.Element("location").Value, offer.Element("internet").Value, offer.Element("telephone").Value, offer.Element("addition").Value));
+            }
+
+            foreach (Offer of in offers)
+            {
+                if (of.Name == name)
+                {
+
+                    XElement elemToRemove = root.Element(name);
+                    elemToRemove.Remove();
+
+                }
+            }
             return View();
         }
         [HttpGet]
@@ -554,10 +585,72 @@ foreach (XElement el in address)
 
             return View();
         }
-        public void btnAddOffer()
+        [HttpGet]
+        public ActionResult ChangeOffer()
         {
-            Redirect("~/Views/Home/AddOffer.cshtml");
+            ArrayList offers = new ArrayList();
+            XDocument doc = model.OffersDoc;
+            XElement root = doc.Root;
+            foreach (XElement offer in root.Elements())
+            {
+                offers.Add(new Offer(Int32.Parse(offer.Attribute("id").Value), Int32.Parse(offer.Element("minimumTime").Value), float.Parse(offer.Element("speed").Value), float.Parse(offer.Element("price").Value), float.Parse(offer.Element("price2").Value), offer.Element("provider").Value, offer.Element("name").Value, offer.Element("location").Value, offer.Element("internet").Value, offer.Element("telephone").Value, offer.Element("addition").Value));
+            }
+            String[] offerNames = new String[offers.Count];
+            for (int i = 0; i < offers.Count; i++)
+            {
+                Offer offer = (Offer)offers[i];
+                offerNames[i] = offer.Name;
+
+            }
+
+            var listItems = offerNames.Select((r, Index) => new ListItem { Text = r, Value = Index.ToString() });
+
+            DropDownList ddl = new DropDownList();
+            ddl.Items.AddRange(listItems.ToArray());
+            return View();
         }
+        [HttpPost]
+        public ActionResult ChangeOffer(String NAME, String provider, String name, String location, String internet, float speed, String telephone, float price, float price2, int minimumTime, String addition)
+        {
+            ArrayList offers = new ArrayList();
+            XDocument doc = model.OffersDoc;
+            XElement root = doc.Root;
+            foreach (XElement offer in root.Elements())
+            {
+                offers.Add(new Offer(Int32.Parse(offer.Attribute("id").Value), Int32.Parse(offer.Element("minimumTime").Value), float.Parse(offer.Element("speed").Value), float.Parse(offer.Element("price").Value), float.Parse(offer.Element("price2").Value), offer.Element("provider").Value, offer.Element("name").Value, offer.Element("location").Value, offer.Element("internet").Value, offer.Element("telephone").Value, offer.Element("addition").Value));
+            }
+
+            foreach (Offer of in offers)
+            {
+                if (of.Name == NAME)
+                {
+
+                    //   XElement elem = root.Element(name);
+                    //ViewBag.provider = of.Provider;
+                    //ViewBag.name = of.Name;
+                    //ViewBag.location = of.Location;
+                    //ViewBag.internet = of.Internet;
+                    //ViewBag.speed = of.Speed;
+                    //ViewBag.telephone = of.Telephone;
+                    //ViewBag.price = of.Price;
+                    //ViewBag.price2 = of.Price2;
+                    //ViewBag.minimumTime = of.MinimumTime;
+                    //ViewBag.addition = of.Addition;
+
+
+                    Offer offer = new Offer(GenerateNextId(doc, "offer"), minimumTime, speed, price, price2, provider, name, location, internet, telephone, addition);
+
+                    XElement newOffer = new XElement("offer", new XElement("provider", provider), new XElement("name", name), new XElement("location", location), new XElement("internet", internet), new XElement("speed", speed), new XElement("telephone", telephone), new XElement("price", price), new XElement("price2", price2), new XElement("minimumTime", minimumTime), new XElement("addition", addition));
+                    doc.Root.Add(newOffer);
+                    model.saveOffersDoc(doc);
+
+
+                    
+                }
+            }
+            return View();
+        }
+
         private bool checkAdmin()
         {
             object value = Session["isLoggedIn"];

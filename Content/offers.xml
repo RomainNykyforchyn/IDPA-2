@@ -1,6 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <offers>
-
   <offer id="1">
     <provider>Swisscom</provider>
     <name>inOne mobile premium</name>
@@ -13,7 +12,6 @@
     <minimumTime>24</minimumTime>
     <addition>nichts</addition>
   </offer>
-
   <offer id="2">
     <provider>Swisscom</provider>
     <name>inOne mobile go</name>
@@ -26,7 +24,6 @@
     <minimumTime>0</minimumTime>
     <addition>nichts</addition>
   </offer>
-
   <offer id="3">
     <provider>Swisscom</provider>
     <name>inOne mobile basic</name>
@@ -39,7 +36,6 @@
     <minimumTime>24</minimumTime>
     <addition>nichts</addition>
   </offer>
-
   <offer id="4">
     <provider>Sunrise</provider>
     <name>WeMobile XL</name>
@@ -52,7 +48,6 @@
     <minimumTime>12</minimumTime>
     <addition>nichts</addition>
   </offer>
-
   <offer id="5">
     <provider>Sunrise</provider>
     <name>WeMobile M</name>
@@ -65,7 +60,6 @@
     <minimumTime>0</minimumTime>
     <addition>Airpods</addition>
   </offer>
-
   <offer id="6">
     <provider>Sunrise</provider>
     <name>prepaid unlimited</name>
@@ -78,7 +72,6 @@
     <minimumTime>0</minimumTime>
     <addition>Airpods</addition>
   </offer>
-
   <offer id="7">
     <provider>Salt</provider>
     <name>smart</name>
@@ -91,7 +84,6 @@
     <minimumTime>0</minimumTime>
     <addition>nichts</addition>
   </offer>
-
   <offer id="8">
     <provider>Salt</provider>
     <name>World</name>
@@ -104,7 +96,6 @@
     <minimumTime>0</minimumTime>
     <addition>nichts</addition>
   </offer>
-
   <offer id="9">
     <provider>Yallo</provider>
     <name>swiss flat 5G</name>
@@ -117,7 +108,6 @@
     <minimumTime>0</minimumTime>
     <addition>nichts</addition>
   </offer>
-
   <offer id="10">
     <provider>Wingo</provider>
     <name>swiss</name>
@@ -130,5 +120,16 @@
     <minimumTime>0</minimumTime>
     <addition>nichts</addition>
   </offer>
-
+  <offer>
+    <provider>provider</provider>
+    <name>name</name>
+    <location>location</location>
+    <internet>3</internet>
+    <speed>2</speed>
+    <telephone>2</telephone>
+    <price>2</price>
+    <price2>2</price2>
+    <minimumTime>2</minimumTime>
+    <addition>addition</addition>
+  </offer>
 </offers>
