@@ -6,238 +6,129 @@
     <name>inOne mobile premium</name>
     <location>Schweiz, EU West, USA, Kanada</location>
     <internet>unlimitiert</internet>
-    <speed>
-      4G, 5G
-    </speed>
-    <telephone>
-      unlimitiert
-    </telephone>
+    <speed>5</speed>
+    <telephone>unlimitiert</telephone>
     <price>160</price>
-    <price2>
-      Nach 12 Monaten 200 CHF
-    </price2>
-    <minimumTime>
-      24 Monate
-    </minimumTime>
+    <price2>200</price2>
+    <minimumTime>24</minimumTime>
     <addition>nichts</addition>
   </offer>
-  <offer>
-    <id>2</id>
+
+  <offer id="2">
     <provider>Swisscom</provider>
     <name>inOne mobile go</name>
     <location>Schweiz, EU West</location>
     <internet>unlimitiert</internet>
-    <speed>
-      4G, 5G
-    </speed>
-    <telephone>
-      unlimitiert
-    </telephone>
-    <price>29 CHF</price>
-    <price2>
-      Nach 12 Monaten 80 CHF
-    </price2>
-    <minimumTime></minimumTime>
+    <speed>5</speed>
+    <telephone>unlimitiert</telephone>
+    <price>29</price>
+    <price2>80</price2>
+    <minimumTime>0</minimumTime>
     <addition>nichts</addition>
   </offer>
-  <offer>
-    <id>3</id>
+
+  <offer id="3">
     <provider>Swisscom</provider>
     <name>inOne mobile basic</name>
     <location>Schweiz, EU West</location>
-    <internet>3GB/Monat</internet>
-    <speed>
-      4G, 5G
-    </speed>
-    <telephone>
-      unlimitiert
-    </telephone>
-    <price>50 CHF</price>
-    <price2>50 CHF</price2>
-    <minimumTime>
-      24 Monate
-    </minimumTime>
+    <internet>3000</internet>
+    <speed>5</speed>
+    <telephone>unlimitiert</telephone>
+    <price>50</price>
+    <price2>50</price2>
+    <minimumTime>24</minimumTime>
     <addition>nichts</addition>
   </offer>
-  <offer>
-    <id>4</id>
+
+  <offer id="4">
     <provider>Sunrise</provider>
     <name>WeMobile XL</name>
-    <location>
-      Schweiz, Europa (fast)
-    </location>
-    <internet>
-      unlimitiert
-    </internet>
-    <speed>
-      2GBits/s
-    </speed>
-    <telephone>
-      unlimitiert
-    </telephone>
-    <price>50 CHF</price>
-    <price2>Nach 24 Monaten 100 CHF</price2>
-    <minimumTime>
-      12 Monate
-    </minimumTime>
+    <location>Schweiz, Europa (fast)</location>
+    <internet>unlimitiert</internet>
+    <speed>5</speed>
+    <telephone>unlimitiert</telephone>
+    <price>50</price>
+    <price2>100</price2>
+    <minimumTime>12</minimumTime>
     <addition>nichts</addition>
   </offer>
-  <offer>
-    <id>5</id>
+
+  <offer id="5">
     <provider>Sunrise</provider>
     <name>WeMobile M</name>
-    <location>
-      Schweiz, Europa (fast)
-    </location>
-    <internet>
-      unlimitiert
-    </internet>
-    <speed>
-      100MBits/s
-    </speed>
-    <telephone>
-      unlimitiert (Innerhalb Schweiz)
-    </telephone>
-    <price>32.50 CHF</price>
-    <price2>Nach 24 Monaten 50 CHF</price2>
-    <minimumTime>
-      Keine (Kündigungsfrist von 2 Monaten)
-    </minimumTime>
-    <addition>
-      Airpods
-    </addition>
+    <location>Schweiz, Europa (fast)</location>
+    <internet>unlimitiert</internet>
+    <speed>4</speed>
+    <telephone>unlimitiert (Innerhalb Schweiz)</telephone>
+    <price>32.50</price>
+    <price2>50</price2>
+    <minimumTime>0</minimumTime>
+    <addition>Airpods</addition>
   </offer>
-  <offer>
-    <id>6</id>
+
+  <offer id="6">
     <provider>Sunrise</provider>
     <name>prepaid unlimited</name>
-    <location>
-      Schweiz
-    </location>
-    <internet>
-      unlimitiert
-    </internet>
-    <speed>
-      4G+
-    </speed>
-    <telephone>
-      unlimitiert (Innerhalb Schweiz)
-    </telephone>
-    <price>2.50CHF/Tag</price>
-    <price2>2.50CHF/Tag</price2>
-    <minimumTime>
-      Keine (Kündigungsfrist von 2 Monaten)
-    </minimumTime>
-    <addition>
-      Airpods
-    </addition>
+    <location>Schweiz</location>
+    <internet>unlimitiert</internet>
+    <speed>4</speed>
+    <telephone>unlimitiert (Innerhalb Schweiz)</telephone>
+    <price>75</price>
+    <price2>75</price2>
+    <minimumTime>0</minimumTime>
+    <addition>Airpods</addition>
   </offer>
-  <offer>
-    <id>7</id>
-    <provider>
-      Salt
-    </provider>
-    <name>
-      smart
-    </name>
-    <location>
-      Schweiz
-    </location>
-    <internet>
-      unlimitiert
-    </internet>
-    <speed>
-      4G, 5G
-    </speed>
-    <telephone>
-      unlimitiert
-    </telephone>
-    <price>59.95 CHF</price>
-    <price2>59.95 CHF</price2>
-    <minimumTime>
-      Keine
-    </minimumTime>
+
+  <offer id="7">
+    <provider>Salt</provider>
+    <name>smart</name>
+    <location>Schweiz</location>
+    <internet>unlimitiert</internet>
+    <speed>5</speed>
+    <telephone>unlimitiert</telephone>
+    <price>59.95</price>
+    <price2>59.95</price2>
+    <minimumTime>0</minimumTime>
     <addition>nichts</addition>
   </offer>
-  <offer>
-    <id>8</id>
-    <provider>
-      Salt
-    </provider>
-    <name>
-      World
-    </name>
-    <location>
-      Schweiz, Europa, USA, Kanada, Zonen C, D, E)
-    </location>
-    <internet>
-      unlimitiert
-    </internet>
-    <speed>
-      4G, 5G
-    </speed>
-    <telephone>
-      unlimitiert, 100Minuten in Zonen C, D, E
-    </telephone>
-    <price>119.95 CHF</price>
-    <price2>119.95 CHF</price2>
-    <minimumTime>
-      Keine
-    </minimumTime>
+
+  <offer id="8">
+    <provider>Salt</provider>
+    <name>World</name>
+    <location>Schweiz, Europa, USA, Kanada, Zonen C, D, E)</location>
+    <internet>unlimitiert</internet>
+    <speed>5</speed>
+    <telephone>unlimitiert, 100Minuten in Zonen C, D, E</telephone>
+    <price>119.95</price>
+    <price2>119.95</price2>
+    <minimumTime>0</minimumTime>
     <addition>nichts</addition>
   </offer>
-  <offer>
-    <id>9</id>
-    <provider>
-      Yallo
-    </provider>
-    <name>
-      swiss flat 5G
-    </name>
-    <location>
-      Schweiz
-    </location>
-    <internet>
-      unlimitiert
-    </internet>
-    <speed>
-      4G, 5G
-    </speed>
-    <telephone>
-      unlimitiert
-    </telephone>
-    <price>68 CHF</price>
-    <price2>68 CHF</price2>
-    <minimumTime>
-      Keine
-    </minimumTime>
+
+  <offer id="9">
+    <provider>Yallo</provider>
+    <name>swiss flat 5G</name>
+    <location>Schweiz</location>
+    <internet>unlimitiert</internet>
+    <speed>5</speed>
+    <telephone>unlimitiert</telephone>
+    <price>68</price>
+    <price2>68</price2>
+    <minimumTime>0</minimumTime>
     <addition>nichts</addition>
   </offer>
-  <offer>
-    <id>10</id>
-    <provider>
-      Wingo
-    </provider>
-    <name>
-      swiss
-    </name>
-    <location>
-      Schweiz
-    </location>
-    <internet>
-      unlimitiert
-    </internet>
-    <speed>
-      4G, 5G
-    </speed>
-    <telephone>
-      unlimitiert
-    </telephone>
-    <price>58 CHF</price>
-    <price2>58 CHF</price2>
-    <minimumTime>
-      Keine (Kündigungsfrist von 2 Monaten)
-    </minimumTime>
+
+  <offer id="10">
+    <provider>Wingo</provider>
+    <name>swiss</name>
+    <location>Schweiz</location>
+    <internet>unlimitiert</internet>
+    <speed>5</speed>
+    <telephone>unlimitiert</telephone>
+    <price>58</price>
+    <price2>58</price2>
+    <minimumTime>0</minimumTime>
     <addition>nichts</addition>
   </offer>
+
 </offers>

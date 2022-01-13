@@ -13,8 +13,8 @@
     <name>gaga</name>
     <password>gaga</password>
     <international>true</international>
-    <amount>2</amount>
-    <volume>2048</volume>
+    <amount>1</amount>
+    <volume>1024</volume>
     <provider>Swisscom</provider>
     <admin>0</admin>
   </user>

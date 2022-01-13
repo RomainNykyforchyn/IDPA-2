@@ -4,6 +4,8 @@ using System;
 using System.Collections;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using System.Xml.Linq;
 
 namespace idpa.Controllers
@@ -281,6 +283,7 @@ foreach (XElement el in address)
             }
             return View();
         }
+        [HttpPost]
         public ActionResult AddOffer(String provider, String name, String location, String internet, float speed, String telephone, float price, float price2, int minimumTime, String addition)
         {
             if (!checkAdmin())
@@ -326,50 +329,112 @@ foreach (XElement el in address)
             XElement root = doc.Root;
             foreach (XElement offer in root.Elements())
             {
-                offers.Add(new Offer(Int32.Parse(offer.Attribute("id").Value), Int32.Parse(offer.Element("minimumTime").Value), float.Parse(offer.Element("speed").Value), float.Parse(offer.Element("price").Value), float.Parse(offer.Element("price2").Value), offer.Element("provider").Value, offer.Element("name").Value, offer.Element("location").Value, offer.Element("internet").Value, offer.Element("telephone").Value, offer.Element("addition").Value));
+
+
+                Offer newOffer = new Offer(
+                    Int32.Parse(offer.Attribute("id").Value),
+                    Int32.Parse(offer.Element("minimumTime").Value),
+                    float.Parse(offer.Element("speed").Value),
+                    float.Parse(offer.Element("price").Value),
+                    float.Parse(offer.Element("price2").Value),
+                    offer.Element("provider").Value, offer.Element("name").Value,
+                    offer.Element("location").Value, offer.Element("internet").Value,
+                    offer.Element("telephone").Value, offer.Element("addition").Value);
+                offers.Add(newOffer);
             }
 
-            ArrayList temp = new ArrayList();
-            Boolean unlimt = false;
             String NullOffer = null;
-            foreach (Offer of in offers)
+            ArrayList tempOffers = new ArrayList(offers);
+            foreach (Object of_ in offers)
             {
-                // IDs.Add(of.Id);
+                Offer of = (Offer)of_;
                 try
                 {
-
-
-
-                    if (loggedUser.Provider != of.Provider)
+                    if (loggedUser.Provider == of.Provider)
                     {
-                        temp = offers;
-                        offers.Remove(of);
                         if (loggedUser.International == of.isInternational())
                         {
-                            temp = offers;
-                            offers.Remove(of);
-                            if (loggedUser.Amount >= 30)
-                            {
-                                temp = offers;
-                                if (!of.Telephone.Contains("Unlimitiert") || !of.Telephone.Contains("unlmitiert"))
+                            int telephone_ = -1;
+                            
+                            if (Int32.TryParse(of.Telephone, out telephone_))
+                            {Int32.TryParse(of.Telephone, out telephone_);
+                                if (loggedUser.Amount < telephone_)
                                 {
-                                    offers.Remove(of);
                                     int volume_ = -1;
-                                    Int32.TryParse(of.Internet, out volume_);
-                                    if (volume_ != -1)
+                                    
+                                    if (Int32.TryParse(of.Internet, out volume_))
                                     {
-                                        if (loggedUser.Volume > volume_)
+                                        Int32.TryParse(of.Internet, out volume_);
+                                        if (loggedUser.Volume < volume_)
                                         {
-                                            temp = offers;
-                                            offers.Remove(of);
+
+                                        }
+                                        else
+                                        {
+                                            tempOffers.Remove(of);
                                         }
                                     }
+                                    else
+                                    {
+                                        if (of.Internet.Contains("Unlimitiert") || of.Internet.Contains("unlimitiert") || of.Internet.Equals("Unlimitiert") || of.Internet.Equals("unlimitiert"))
+                                        {
 
-
+                                        }
+                                        else
+                                        {
+                                            tempOffers.Remove(of);
+                                        }
+                                    }
                                 }
+                                else
+                                {
+                                    tempOffers.Remove(of);
+                                }
+                            }
+                            else
+                            {
+                                if (of.Telephone.Contains("Unlimitiert") || of.Telephone.Contains("unlmitiert") || of.Telephone.Equals("Unlimitiert") || of.Telephone.Equals("unlimitiert"))
+                                {
+                                    int volume_ = -1;
+                                    
+                                    if (Int32.TryParse(of.Internet, out volume_))
+                                    {Int32.TryParse(of.Internet, out volume_);
+                                        if (loggedUser.Volume < volume_)
+                                        {
 
+                                        }
+                                        else
+                                        {
+                                            tempOffers.Remove(of);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (of.Internet.Contains("Unlimitiert") || of.Internet.Contains("unlimitiert") || of.Internet.Equals("Unlimitiert") || of.Internet.Equals("unlimitiert"))
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            tempOffers.Remove(of);
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    tempOffers.Remove(of);
+                                }
                             }
                         }
+                        else
+                        {
+                            tempOffers.Remove(of);
+                        }
+                    }
+                    else
+                    {
+                        tempOffers.Remove(of);
+                        
                     }
                 }
                 catch (Exception)
@@ -381,6 +446,7 @@ foreach (XElement el in address)
 
 
             }
+            offers = tempOffers;
             if (offers.Count == 0)
             {
                 NullOffer = "Kein passendes Angebot gefunden!";
@@ -388,29 +454,65 @@ foreach (XElement el in address)
             }
             else
             { 
-                Offer offer1 = (Offer)offers[0];
-                Offer offer2 = (Offer)offers[0];
-                Offer offer3 = (Offer)offers[0];
-                ArrayList cheapOffers = new ArrayList();
+                Offer offer1 = null;
+                Offer offer2 = null;
+                Offer offer3 = null;
+                ArrayList cheapOffers = new ArrayList(offers);
                 cheapOffers.Add(offer1);
                 cheapOffers.Add(offer2);
                 cheapOffers.Add(offer3);
-                Offer nodeOffer = (Offer)offers[0];
-                for(int i = 0; i < 3; i++)
+                
+                foreach(Offer of in offers)
                 {
-                    foreach(Offer of in offers)
-                {
-                    if (of.Price < nodeOffer.Price)
+                    if (offer1 != null)
                     {
-                        nodeOffer = of;
+                        if (of.Price > offer1.Price)
+                        {
+                            if (offer2 != null)
+                            {
+                                if (of.Price > offer2.Price)
+                                {
+                                    if (offer3 != null)
+                                    {
+                                        if (of.Price > offer3.Price)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            offer3 = of;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        offer3 = of;
+                                    }
+                                }
+                                else
+                                {
+                                    offer3 = offer2;
+                                    offer2 = of;
+                                }
+
+                            }
+                            else
+                            {
+                                offer2 = of;
+                            }
+                        }
+                        else
+                        {
+                            offer2 = offer1;
+                            offer1 = of;
+                        }
                     }
+                    else
+                    {
+                        offer1 = of;
+                    }
+                    
                 }
-                    cheapOffers[i] = nodeOffer;
-                    offers.Remove(nodeOffer);
-                }
-                offer1 = (Offer)cheapOffers[0];
-                offer2 = (Offer)cheapOffers[1];
-                offer3 = (Offer)cheapOffers[2];
+
                 ViewBag.provider = offer1.Provider;
                 ViewBag.name = offer1.Name;
                 ViewBag.location = offer1.Location;
@@ -418,7 +520,7 @@ foreach (XElement el in address)
                 ViewBag.speed = offer1.Speed;
                 ViewBag.telephone = offer1.Telephone;
                 ViewBag.price = offer1.Price;
-                ViewBag.price2 = offer1.Price2;
+                ViewBag.price20 = offer1.Price2;
                 ViewBag.minimumTime = offer1.MinimumTime;
                 ViewBag.addition = offer1.Addition;
 
@@ -444,6 +546,10 @@ foreach (XElement el in address)
                 ViewBag.minimumTime2 = offer3.MinimumTime;
                 ViewBag.addition2 = offer3.Addition;
             }
+
+
+            
+
 
 
             return View();
