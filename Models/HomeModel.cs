@@ -8,20 +8,28 @@ namespace idpa.Models
 {
     public class HomeModel
     {
-        private String xmlPath;
-        private XDocument doc;
+        private String xmlUsersPath, xmlOffersPath;
+        private XDocument usersDoc, offersDoc;
         public HomeModel()
         {
-            xmlPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/users.xml");
-            doc = XDocument.Load(xmlPath);
+            xmlUsersPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/users.xml");
+            usersDoc = XDocument.Load(xmlUsersPath);
+            xmlOffersPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/offers.xml");
+            offersDoc = XDocument.Load(xmlOffersPath);
         }
-        public XDocument getDoc()
+        public void saveUsersDoc(XDocument doc)
         {
-            return this.doc;
+            doc.Save(xmlUsersPath);
         }
-        public String getPath()
+        public void saveOffersDoc(XDocument doc)
         {
-            return xmlPath;
+            doc.Save(xmlOffersPath);
         }
+
+        public string XmlUsersPath { get => xmlUsersPath; set => xmlUsersPath = value; }
+        public string XmlOffersPath { get => xmlOffersPath; set => xmlOffersPath = value; }
+        public XDocument UsersDoc { get => usersDoc; set => usersDoc = value; }
+        public XDocument OffersDoc { get => offersDoc; set => offersDoc = value; }
+
     }
 }

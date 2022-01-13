@@ -1,7 +1,6 @@
 ﻿using idpa.Content;
 using idpa.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Xml.Linq;
@@ -11,14 +10,11 @@ namespace idpa.Controllers
     public class HomeController : Controller
     {
         private HomeModel model;
-        private XDocument doc;
         private bool isLoggedIn;
         private User loggedUser;
-        //private String name, password;
         public HomeController()
         {
             model = new HomeModel();
-            doc = model.getDoc();
         }
 
 
@@ -30,20 +26,44 @@ namespace idpa.Controllers
         [HttpPost]
         public ActionResult Index(String name, String password)
         {
-            XDocument doc = model.getDoc();
+            XDocument doc = model.OffersDoc;
             try
-            {   
-                IEnumerable<XElement> user_ = from el in doc.Elements("user") where (string)el.Element("name") == name && (string)el.Element("password") == password select el;
-                //for(int i = 0; i < user.Elements().Count())
-                //{
+            {
+                XElement user = null;
+                XElement users = doc.Element("users");
+                for (int i = 0; i < users.Elements().Count(); i++)
+                {
+                    XElement user_ = users.Elements().ElementAt(i);
+                    if(user_.Element("name").Value.Equals(name) && user_.Element("password").Value.Equals(password))
+                    {
+                        user = user_;
+                    }
+                }
+                if (user == null)
+                {
+                    return RedirectToAction("/Index");
+                }
+                //IEnumerable<XElement> user_ = from el in doc.Elements("user") where (string)el.Element("name").Value == name && (string)el.Element("password").Value == password select el;
+                //XElement user = user_.First();
+                //foreach (XElement el in user_)
+                //    Console.WriteLine(el.Name);
+                
+                int userId = Int32.Parse(user.Attribute("id").Value);
+                String userName = user.Element("name").Value;
+                String userPassword = user.Element("password").Value;
+                bool userInternational = Boolean.Parse(user.Element("international").Value);
+                int userAmount = Int32.Parse(user.Element("amount").Value);
+                int userVolume = Int32.Parse(user.Element("volume").Value);
+                String userProvider = user.Element("provider").Value;
+                int userAdmin = Int32.Parse(user.Element("admin").Value);
+                loggedUser = new User(userId, userAmount,userAdmin,userVolume, userName, userPassword,userProvider, userInternational );
+                Session["loggedUser"] = loggedUser;
+                Session["isLoggedIn"] = true;
+                if (loggedUser.IsAdmin())
+                {
+                    return RedirectToAction("/Admin");
+                }
 
-                //}
-                XElement user = (XElement)user_;
-                loggedUser = new User(user.Attributes()., user.Element, user.ElementAt(1), user.ElementAt(2), user.ElementAt(3), user.ElementAt(4), user.ElementAt(5), user.ElementAt(6));
-                    Session["isLoggedIn"] = true;
-                if()
-                Session["name"] = name;
-                Session["password"] = password;
 
 
             }
@@ -77,6 +97,7 @@ foreach (XElement el in address)
         [HttpPost]
         public ActionResult Register(String name, String password, String international, String amount, String volume, String provider)
         {
+            XDocument doc = model.UsersDoc;
             //Declaration
             int intAmount;
             Boolean boolInter;
@@ -135,7 +156,7 @@ foreach (XElement el in address)
             /*school.Add(new XElement("Student",
                        new XElement("FirstName", "David"),
                        new XElement("LastName", "Smith")));*/
-            doc.Save(model.getPath());
+            model.saveUsersDoc(doc);
             
             return RedirectToAction("/Index");
         }
@@ -164,6 +185,7 @@ foreach (XElement el in address)
         [HttpPost]
         public ActionResult Tarif(String international, String amount, String volume, String provider)
         {
+            XDocument doc = model.UsersDoc;
             //Declaration
             int intAmount;
             Boolean boolInter;
@@ -213,17 +235,18 @@ foreach (XElement el in address)
             XElement users = doc.Element("users");
             foreach(XElement user in users.Elements())
             {
+                User loggedUser = (User)Session["loggedUser"];
                 String name = (String)user.Element("name");
-                String _name = (String)Session["name"];
+                String _name = loggedUser.Name;
                 String password = (String)user.Element("password");
-                String _password = (String)Session["password"];
+                String _password = loggedUser.Password;
                 if (name.Equals(_name) && password.Equals(_password))
                 {
                     user.Element("international").SetValue(boolInter);
                     user.Element("amount").SetValue(intAmount);
                     user.Element("volume").SetValue(intVolume);
                     user.Element("provider").SetValue(provider);
-                    doc.Save(model.getPath());
+                    model.saveUsersDoc(doc);
                     return RedirectToAction("/Tarif");
                 }
             }
@@ -237,8 +260,31 @@ foreach (XElement el in address)
             
             return RedirectToAction("/Tarif");
         }
+        public ActionResult Admin()
+        {
+            object value = Session["isLoggedIn"];
+            User user = (User)Session["loggedUser"];
+            if (value != null)
+            {
+                isLoggedIn = (bool)value;
+            }
+            else
+            {
+                isLoggedIn = false;
+            }
+
+            if (isLoggedIn && user.IsAdmin())
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("/Index");
+            }
+        }
         private int GenerateNextId()
         {
+            XDocument doc = model.UsersDoc;
             return doc.Descendants("user")
                        .OrderByDescending(x => Convert.ToInt32(x.Attribute("id").Value))
                        .Select(x => Convert.ToInt32(x.Attribute("id").Value))

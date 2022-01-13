@@ -32,7 +32,7 @@ namespace idpa.Content
             this.international = international;
         }
 
-        public Boolean isAdmin()
+        public Boolean IsAdmin()
         {
             if (this.admin.Equals(1)){
                 return true;

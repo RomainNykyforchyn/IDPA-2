@@ -8,10 +8,10 @@ namespace idpa.Content
     public class Offer
     {
         private int id, minimumTime;
-        private Double speed, price, price2;
+        private float speed, price, price2;
         private String provider, name, location, internet, telephone, addition;
 
-        public Offer(int id, int minimumTime, double speed, double price, double price2, string provider, string name, string location, string internet, string telephone, string addition)
+        public Offer(int id, int minimumTime, float speed, float price, float price2, string provider, string name, string location, string internet, string telephone, string addition)
         {
             this.id = id;
             this.minimumTime = minimumTime;
@@ -29,9 +29,9 @@ namespace idpa.Content
 
         public int Id { get => id; set => id = value; }
         public int MinimumTime { get => minimumTime; set => minimumTime = value; }
-        public double Speed { get => speed; set => speed = value; }
-        public double Price { get => price; set => price = value; }
-        public double Price2 { get => price2; set => price2 = value; }
+        public float Speed { get => speed; set => speed = value; }
+        public float Price { get => price; set => price = value; }
+        public float Price2 { get => price2; set => price2 = value; }
         public string Provider { get => provider; set => provider = value; }
         public string Name { get => name; set => name = value; }
         public string Location { get => location; set => location = value; }
