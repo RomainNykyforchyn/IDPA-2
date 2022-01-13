@@ -12,7 +12,7 @@
 
 [JQuery](https://jquery.com/)
 
-[Tailwind CSS](https://tailwindcss.com/)
+[Bootstrap](https://getbootstrap.com)
 
 ## Usage <a name="usage"></a>
 
