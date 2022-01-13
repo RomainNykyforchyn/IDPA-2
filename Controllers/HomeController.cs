@@ -291,9 +291,8 @@ foreach (XElement el in address)
                 return RedirectToAction("/Index");
             }
             XDocument doc = model.OffersDoc;
-            Offer offer = new Offer(GenerateNextId(doc, "offer"), Int32.Parse(minimumTime), Int32.Parse(speed), Int32.Parse(price), Int32.Parse(price2), provider, name, location, internet, telephone, addition);
             
-            XElement newOffer = new XElement("offer", new XElement("provider", provider), new XElement("name", name), new XElement("location", location), new XElement("internet", internet), new XElement("speed", speed), new XElement("telephone", telephone), new XElement("price", price), new XElement("price2", price2), new XElement("minimumTime", minimumTime), new XElement("addition", addition));
+            XElement newOffer = new XElement("offer", new XAttribute("id", GenerateNextId(doc, "offer")), new XElement("provider", provider), new XElement("name", name), new XElement("location", location), new XElement("internet", internet), new XElement("speed", speed), new XElement("telephone", telephone), new XElement("price", price), new XElement("price2", price2), new XElement("minimumTime", minimumTime), new XElement("addition", addition));
             doc.Root.Add(newOffer);
             model.saveOffersDoc(doc);
             return View();
@@ -600,7 +599,16 @@ foreach (XElement el in address)
             XElement root = doc.Root;
             foreach (XElement offer in root.Elements())
             {
-                offers.Add(new Offer(Int32.Parse(offer.Attribute("id").Value), Int32.Parse(offer.Element("minimumTime").Value), float.Parse(offer.Element("speed").Value), float.Parse(offer.Element("price").Value), float.Parse(offer.Element("price2").Value), offer.Element("provider").Value, offer.Element("name").Value, offer.Element("location").Value, offer.Element("internet").Value, offer.Element("telephone").Value, offer.Element("addition").Value));
+                Offer newOffer = new Offer(
+                    Int32.Parse(offer.Attribute("id").Value),
+                    Int32.Parse(offer.Element("minimumTime").Value),
+                    float.Parse(offer.Element("speed").Value),
+                    float.Parse(offer.Element("price").Value),
+                    float.Parse(offer.Element("price2").Value),
+                    offer.Element("provider").Value, offer.Element("name").Value,
+                    offer.Element("location").Value, offer.Element("internet").Value,
+                    offer.Element("telephone").Value, offer.Element("addition").Value);
+                offers.Add(newOffer);
             }
             String[] offerNames = new String[offers.Count];
             for (int i = 0; i < offers.Count; i++)

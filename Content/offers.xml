@@ -120,16 +120,4 @@
     <minimumTime>0</minimumTime>
     <addition>nichts</addition>
   </offer>
-  <offer>
-    <provider>provider</provider>
-    <name>name</name>
-    <location>location</location>
-    <internet>3</internet>
-    <speed>2</speed>
-    <telephone>2</telephone>
-    <price>2</price>
-    <price2>2</price2>
-    <minimumTime>2</minimumTime>
-    <addition>addition</addition>
-  </offer>
 </offers>

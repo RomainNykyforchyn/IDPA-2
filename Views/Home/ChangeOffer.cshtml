@@ -1,7 +1,40 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "ChangeOffer";
 }
 
 <h2>ChangeOffer</h2>
 
+<form method="post" action="">
+    <p>Name</p>
+
+
+    <form runat="server">
+        <asp:DropDownList ID="ddl" runat="server" name="NAME">
+            <asp:ListItem Value="plschs"> -->Please choose provider</asp:ListItem>
+        </asp:DropDownList>
+    </form>
+
+    <label for="1">Provider:</label>
+    <input type="text" id="1" name="provider" value=""><br><br>
+    <label for="2">Name:</label>
+    <input type="text" id="2" name="name" value=""><br><br>
+    <label for="3">Ort:</label>
+    <input type="text" id="3" name="location" value=""><br><br>
+    <label for="4">Internet:</label>
+    <input type="text" id="4" name="internet" value=""><br><br>
+    <label for="5">Geschwindigkeit:</label>
+    <input type="text" id="5" name="speed" value=""><br><br>
+    <label for="6">Telephone:</label>
+    <input type="text" id="6" name=">telephone" value=""><br><br>
+    <label for="7">Preis:</label>
+    <input type="text" id="7" name="price" value=""><br><br>
+    <label for="8">Preis nach 1 Jahr:</label>
+    <input type="text" id="8" name="price2" value=""><br><br>
+    <label for="9">Minimum Laufzeit:</label>
+    <input type="text" id="9" name="minimumTime" value=""><br><br>
+    <label for="10">Zusatz:</label>
+    <input type="text" id="10" name="addition" value=""><br><br>
+
+
+    <input type="submit" value="Change" />
+</form>

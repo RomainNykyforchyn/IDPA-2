@@ -1,7 +1,16 @@
-﻿
-@{
-    ViewBag.Title = "DeleteOffer";
-}
+﻿@{ ViewBag.Title = "DeleteOffer"; }
 
 <h2>DeleteOffer</h2>
 
+<form method="post" action="">
+    <p>Name</p>
+
+
+    <form runat="server">
+        <asp:DropDownList ID="ddl" runat="server">
+            <asp:ListItem Value="plschs"> -->Please choose a username </asp:ListItem>
+        </asp:DropDownList>
+    </form>
+
+    <input type="submit" value="Delete" class="submit" />
+</form>
