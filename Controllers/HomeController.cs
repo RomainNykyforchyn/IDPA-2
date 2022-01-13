@@ -480,6 +480,7 @@ foreach (XElement el in address)
             offers = tempOffers;
             if (offers.Count == 0)
             {
+                
                 NullOffer = "Kein passendes Angebot gefunden!";
                 //giz ned koleg
             }
@@ -543,28 +544,34 @@ foreach (XElement el in address)
                     }
                     
                 }
-
-                ViewBag.provider = offer1.Provider;
-                ViewBag.name = offer1.Name;
-                ViewBag.location = offer1.Location;
-                ViewBag.internet = offer1.Internet;
-                ViewBag.speed = offer1.Speed;
-                ViewBag.telephone = offer1.Telephone;
-                ViewBag.price = offer1.Price;
-                ViewBag.price20 = offer1.Price2;
-                ViewBag.minimumTime = offer1.MinimumTime;
-                ViewBag.addition = offer1.Addition;
-
-                ViewBag.provider1 = offer2.Provider;
-                ViewBag.name1 = offer2.Name;
-                ViewBag.location1 = offer2.Location;
-                ViewBag.internet1 = offer2.Internet;
-                ViewBag.speed1 = offer2.Speed;
-                ViewBag.telephone1 = offer2.Telephone;
-                ViewBag.price1 = offer2.Price;
-                ViewBag.price21 = offer2.Price2;
-                ViewBag.minimumTime1 = offer2.MinimumTime;
-                ViewBag.addition1 = offer2.Addition;
+                if (offer1 != null)
+                {
+                    ViewBag.provider = offer1.Provider;
+                    ViewBag.name = offer1.Name;
+                    ViewBag.location = offer1.Location;
+                    ViewBag.internet = offer1.Internet;
+                    ViewBag.speed = offer1.Speed;
+                    ViewBag.telephone = offer1.Telephone;
+                    ViewBag.price = offer1.Price;
+                    ViewBag.price20 = offer1.Price2;
+                    ViewBag.minimumTime = offer1.MinimumTime;
+                    ViewBag.addition = offer1.Addition;
+                }
+                
+                if(offer2 != null)
+                {
+                    ViewBag.provider1 = offer2.Provider;
+                    ViewBag.name1 = offer2.Name;
+                    ViewBag.location1 = offer2.Location;
+                    ViewBag.internet1 = offer2.Internet;
+                    ViewBag.speed1 = offer2.Speed;
+                    ViewBag.telephone1 = offer2.Telephone;
+                    ViewBag.price1 = offer2.Price;
+                    ViewBag.price21 = offer2.Price2;
+                    ViewBag.minimumTime1 = offer2.MinimumTime;
+                    ViewBag.addition1 = offer2.Addition;
+                }
+                
 
                 ViewBag.provider2 = offer3.Provider;
                 ViewBag.name2 = offer3.Name;
