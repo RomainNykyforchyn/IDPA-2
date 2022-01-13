@@ -26,7 +26,7 @@ namespace idpa.Controllers
         [HttpPost]
         public ActionResult Index(String name, String password)
         {
-            XDocument doc = model.OffersDoc;
+            XDocument doc = model.UsersDoc;
             try
             {
                 XElement user = null;

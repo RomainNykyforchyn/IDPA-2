@@ -172,6 +172,7 @@
     <Content Include="Views\Home\AddOffer.cshtml" />
     <Content Include="Views\Home\ChangeOffer.cshtml" />
     <Content Include="Views\Home\DeleteView.cshtml" />
+    <Content Include="Views\Home\Result.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
