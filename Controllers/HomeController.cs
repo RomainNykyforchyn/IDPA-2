@@ -41,19 +41,13 @@ namespace idpa.Controllers
                         user = user_;
                     }
                 }
-                //for (int i = 0; i < users.Elements().Count(); i++)
-                //{
-                //    XElement user_ = users.Elements().ElementAt(i);
-                    
-                //}
+
+
                 if (user == null)
                 {
                     return RedirectToAction("/Index");
                 }
-                //IEnumerable<XElement> user_ = from el in doc.Elements("user") where (string)el.Element("name").Value == name && (string)el.Element("password").Value == password select el;
-                //XElement user = user_.First();
-                //foreach (XElement el in user_)
-                //    Console.WriteLine(el.Name);
+            
                 
                 int userId = Int32.Parse(user.Attribute("id").Value);
                 String userName = user.Element("name").Value;
@@ -80,18 +74,6 @@ namespace idpa.Controllers
             }
 
 
-
-            /*
-             XElement root = XElement.Load("PurchaseOrder.xml");
-IEnumerable<XElement> address =
-    from el in root.Elements("Address")
-    where (string)el.Attribute("Type") == "Billing"
-    select el;
-foreach (XElement el in address)
-    Console.WriteLine(el);
-             */
-            //this.name = name;
-            //this.password = password;
             return RedirectToAction("/Tarif");
         }
 
@@ -160,9 +142,6 @@ foreach (XElement el in address)
             user.Add(new XAttribute("id", GenerateNextId(model.UsersDoc,"user")));
             user.Add(new XElement("name", name), new XElement("password", password), new XElement("international", boolInter), new XElement("amount", intAmount), new XElement("volume", intVolume), new XElement("provider", provider), new XElement("admin", "0"));
             users.Add(user);
-            /*school.Add(new XElement("Student",
-                       new XElement("FirstName", "David"),
-                       new XElement("LastName", "Smith")));*/
             model.saveUsersDoc(doc);
             
             return RedirectToAction("/Index");
@@ -177,7 +156,7 @@ foreach (XElement el in address)
             }
             else
             {
-                isLoggedIn = false; // or whatever you want to do if there is no value
+                isLoggedIn = false;
             }
 
             if (isLoggedIn)
@@ -257,13 +236,6 @@ foreach (XElement el in address)
                     return RedirectToAction("/Result");
                 }
             }
-            //XElement user = new XElement("user");
-            //user.Add(new XAttribute("id", GenerateNextId()));
-            //user.Add(new XElement("name", name), new XElement("password", password), new XElement("international", boolInter), new XElement("amount", intAmount), new XElement("volume", intVolume), new XElement("provider", provider));
-            //users.Add(user);
-            /*school.Add(new XElement("Student",
-                       new XElement("FirstName", "David"),
-                       new XElement("LastName", "Smith")));*/
             
             return RedirectToAction("/Tarif");
         }
@@ -469,7 +441,7 @@ foreach (XElement el in address)
                 }
                 catch (Exception)
                 {
-                    // 
+
                     throw;
                 }
 
@@ -481,7 +453,6 @@ foreach (XElement el in address)
             {
                 
                 NullOffer = "Kein passendes Angebot gefunden!";
-                //giz ned koleg
             }
             else
             { 
@@ -640,17 +611,6 @@ foreach (XElement el in address)
                 if (of.Name == NAME)
                 {
 
-                    //   XElement elem = root.Element(name);
-                    //ViewBag.provider = of.Provider;
-                    //ViewBag.name = of.Name;
-                    //ViewBag.location = of.Location;
-                    //ViewBag.internet = of.Internet;
-                    //ViewBag.speed = of.Speed;
-                    //ViewBag.telephone = of.Telephone;
-                    //ViewBag.price = of.Price;
-                    //ViewBag.price2 = of.Price2;
-                    //ViewBag.minimumTime = of.MinimumTime;
-                    //ViewBag.addition = of.Addition;
 
 
                     Offer offer = new Offer(GenerateNextId(doc, "offer"), minimumTime, speed, price, price2, provider, name, location, internet, telephone, addition);
